@@ -1,7 +1,11 @@
 <h3>Lists of items are</h3>
-{% for items in obj %}
-{{items.status}}
 <br>
+{% for item in obj %}
+{{item.edited}}
+<a href="{% url 'edit' item.id %}">edit</a>
+<br>
+{{item.deleted}}
+<a href="{% url 'delete' item.id %}">delete</a>
 {% endfor %}
 <br>
 <h4>Numbers of objects are</h4>

@@ -5,10 +5,18 @@ from django.contrib.contenttypes.models import ContentType
 # code templates for privileges to superUser, Staffs and Users
 
 # Create your models here.
-def TemplateHandler(model):
+def TemplateHandler(user,model):
+ single_perm = []
  content_type = ContentType.objects.get_for_model(model)
- user_perm = Permission.objects.filter(content_type=content_type)
- return user_perm
+ user_perms = Permission.objects.filter(content_type=content_type)
+ for user_perm in user_perms:
+  perm = Permission.objects.get(
+   codename = user_perm.codename,
+   content_type = content_type
+  )
+  single_perm.append(perm)
+ for perm in single_perm:
+  user.user_permissions.add(perm)
  
  # if permission is not None:
  #  for perm in user_perm:

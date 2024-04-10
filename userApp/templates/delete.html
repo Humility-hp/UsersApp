@@ -1,0 +1,9 @@
+<div>
+ <form method="POST">
+  {% csrf_token %}
+  {% for i in item %}
+  <p>are you sure you want to delete {{i.item}} from your lists?</p>
+  {% endfor %}
+  <button type="submit">delete</button>
+ </form>
+</div>

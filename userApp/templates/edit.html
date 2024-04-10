@@ -1,0 +1,32 @@
+
+<div class="container">
+ <form method="POST">
+  {% csrf_token %}
+  <label for="">New name of Item</label>
+  <input type="text", name='title',placeholder="change {{item.item}} to...", required>
+  <button type="submit">Edit</button>
+ </form>
+</div>
+
+<style>
+ .container{
+  background-color:lightblue;
+  height:25vh;
+  display:block;
+  margin:auto;
+  margin-top:auto;
+  margin-bottom:auto;
+  width:50vw
+ }
+ form{
+  margin:auto;
+  margin-top:auto;
+  margin-bottom: auto;
+  width:50%;
+  background-color:antiquewhite;
+  height:10vh
+ }
+ button{
+  background-color:blueviolet
+ }
+</style>

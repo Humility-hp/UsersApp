@@ -1,0 +1,34 @@
+<div class="container">
+<form action="" method="POST">
+ {% csrf_token %}
+ <label for="">click</label>
+ <input type="checkbox", id="click", name="assign", value="user">
+ <input type="checkbox", id="check", name="assign", value="[staff,user]">
+ <button type="submit">submit</button>
+</form>
+</div>
+
+<style>
+ .container{
+  background-color:antiquewhite;
+  width:50%;
+  height:10%;
+  margin:auto
+ }
+ form{
+  background-color:azure;
+  width:50%;
+  height:50px;
+  margin:auto;
+ }
+ label{
+  background-color:aquamarine;
+ }
+ input{
+  background-color:blue
+ }
+ 
+ button{
+  cursor: pointer;
+ }
+</style>
