@@ -1,13 +1,52 @@
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<!-- jquery code here -->
+<script>
+ $(document).ready(function(){
+  $('.attendancecheckvalue').click(function(){
+   var txt =""
+   $('.attendancecheckvalue:checked').each(function(){
+    txt+=$(this).val()+","
+   });
+   $('#attendanceallvalues').val(txt);
+  });
+ });
+</script>
+{% for item in context %}
 <div class="container">
 <form action="" method="POST">
  {% csrf_token %}
- <label for="">click</label>
- <input type="checkbox", id="click", name="assign", value="user">
- <input type="checkbox", id="check", name="assign", value="[staff,user]">
- <button type="submit">submit</button>
+ <table>
+  <tr class="head">
+   <th>Name</th>
+   <th>User</th>
+   <th>Staff</th>
+   <th>Super_user</th>
+   <th>Remove</th>
+  </tr>
+  <tr>
+   <td>{{item}}</td>
+   <td>
+    <input type="checkbox", id="check", name="assign", value="User-{{item}}", class="attendancecheckvalue" >
+   </td>
+   <td>
+    <input type="checkbox", id="check", name="assign", value="Staff-{{item}}", class="attendancecheckvalue" >
+   </td>
+   <td>
+    <input type="checkbox", id="check", name="assign", value="Super_user-{{item}}", class="attendancecheckvalue" >
+   </td>
+   <td>
+        <input type="checkbox", id="check", name="assign", value="Delete-{{item}}", class="attendancecheckvalue" >
+   </td>
+  </tr>
+ </table>
+ {% endfor %}
+ <br>
+ <input type="text", name="attendance", id="attendanceallvalues" size="100">
+ <button type="submit" id="but1" value="Insert Record">submit</button>
 </form>
 </div>
-
+<!-- 
 <style>
  .container{
   background-color:antiquewhite;
@@ -30,5 +69,14 @@
  
  button{
   cursor: pointer;
+ }
+</style> -->
+<style>
+ button{
+  background-color:aqua;
+  margin-top:40px;
+  width:15%;
+  height:20px;
+  cursor:pointer
  }
 </style>

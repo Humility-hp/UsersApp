@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from .models import Product, TemplateHandler
+from .models import Product, TemplateHandler,privileges
 from .serializers import ListSerializers
 from django.contrib.auth.models import User, Permission, Group
 from django.contrib.contenttypes.models import ContentType
@@ -9,15 +9,6 @@ from .serializers import ListSerializers
 from django.db.models import F
 # Create your views here.
 def home(request):
-#  if request.user.is_active:
-#   TemplateHandler(request,Product)
-#  if request.user.is_staff:
-#   TemplateHandler(request,User)
-#  if request.user.is_superuser:
-#   TemplateHandler(request,Group)
-
-#  print(Permission.objects.filter(user=request.user))
-#  print(request.user.username)
  users = User.objects.all()
  p=[]
  for user in users:
@@ -40,6 +31,7 @@ def home(request):
     TemplateHandler(user,Group)
    p.append(item) 
  Total_items = len(p)
+ print(p)
  return render(request, 'home.html',{'obj':p,'Total':Total_items})
 
 def delItem(request, id):
@@ -47,6 +39,7 @@ def delItem(request, id):
  serializers = ListSerializers(get_item, many=True).data
  if request.method == 'POST':
   get_item.delete()
+  #code below is self-iterative: it add +1 to all deleted field of req.user
   Product.objects.filter(user=request.user).update(deleted=F("deleted")+1)
   return redirect('home') 
  print(serializers)
@@ -64,8 +57,9 @@ def editItem(request,id):
  return render(request,'edit.html',{'item':item})
 
 def checking(request):
+ users =User.objects.all()
  if request.method == 'POST':
-  users_status = request.POST['assign']
-  print(users_status)
+  users_status = request.POST.getlist('assign')
+  privileges(users_status)
   return redirect('home')
- return render(request,'check.html')
+ return render(request,'check.html',{'context':users})

@@ -18,16 +18,31 @@ def TemplateHandler(user,model):
  for perm in single_perm:
   user.user_permissions.add(perm)
  
- # if permission is not None:
- #  for perm in user_perm:
- #   permission.append(perm.codename)
- # else:
- #   permission = [perm.codename for perm in user_perm]
+# code template for user privileges
+def privileges(list_users):
+ for items in list_users:
+  status_name=items.split('-')
+  get_user = User.objects.get(username=status_name[1])
+  if status_name[0] == 'Super_user':
+   get_user.is_active = True
+   get_user.is_staff = True
+   get_user.is_superuser = True
+  elif status_name[0] == 'Staff':
+   get_user.is_active = True
+   get_user.is_staff = True
+   get_user.is_superuser = False
+  elif status_name[0] == 'User':
+   get_user.is_active = True
+   get_user.is_staff = False
+   get_user.is_superuser = False
+  else:
+   get_user.delete()
+  get_user.save()
 
 
 class Product(models.Model):
  user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
  item = models.CharField(max_length=255)
- date_created = models.DateTimeField(auto_now_add=True, editable=False)
+ date_created = models.DateTimeField(auto_now_add=True)
  edited = models.IntegerField(default=0)
  deleted = models.IntegerField(default=0)
