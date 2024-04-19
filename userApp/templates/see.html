@@ -1,0 +1,48 @@
+<div class="container">
+ <h3>{{ context.username|title }}'s info</h3>
+ <ul>
+  <li>Status: {{context.status}}</li>
+  <li>No of items: {{context.items_added}} items</li>
+  <li>Edited: {{context.edited}} items</li>
+  <li>Deleted: {{context.deleted}} items</li>
+ </ul>
+</div>
+
+<style>
+ .container{
+  background-color:aliceblue;
+  width:500px;
+  height:200px;
+  margin:auto;
+  margin-top:200px;
+  border-radius: 10px;
+  padding-top:5px;
+  border:2px solid rgba(0,0,0,0.2)
+ }
+ h3{
+  background-color:transparent;
+  width:50%;
+  margin:auto;
+  margin-top:2px;
+  text-align: center;
+ }
+ ul{
+  list-style: none;
+  background-color:transparent;
+  width:60%;
+  height:70%;
+  margin-left:25px;
+  margin-top:20px;
+  font-size: 20px;
+  /* display:block; */
+  /* flex-direction: column; */
+ }
+ ul li{
+  background-color:aliceblue;
+  width:70%;
+  margin-top:15px
+ }
+ul li:nth-child(1){
+margin-top:10px
+}
+</style>

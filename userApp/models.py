@@ -1,10 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User,Permission
 from django.contrib.contenttypes.models import ContentType
-
+from django.db.models import F
+from django.shortcuts import redirect
 # code templates for privileges to superUser, Staffs and Users
 
 # Create your models here.
+
+
 def TemplateHandler(user,model):
  single_perm = []
  content_type = ContentType.objects.get_for_model(model)
@@ -43,6 +46,6 @@ def privileges(list_users):
 class Product(models.Model):
  user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
  item = models.CharField(max_length=255)
- date_created = models.DateTimeField(auto_now_add=True)
+ date_create = models.DateTimeField(auto_now_add=True)
  edited = models.IntegerField(default=0)
  deleted = models.IntegerField(default=0)

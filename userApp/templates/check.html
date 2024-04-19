@@ -3,80 +3,122 @@
 <!-- jquery code here -->
 <script>
  $(document).ready(function(){
-  $('.attendancecheckvalue').click(function(){
+  $('.checkvalue').click(function(){
    var txt =""
-   $('.attendancecheckvalue:checked').each(function(){
+   $('.checkvalue:checked').each(function(){
     txt+=$(this).val()+","
    });
-   $('#attendanceallvalues').val(txt);
+   $('#allvalues').val(txt);
   });
  });
 </script>
-{% for item in context %}
 <div class="container">
+<h3>List of users and status</h3>
 <form action="" method="POST">
  {% csrf_token %}
  <table>
-  <tr class="head">
+
+{% if request.user.is_active%}
+<tr>
    <th>Name</th>
    <th>User</th>
    <th>Staff</th>
-   <th>Super_user</th>
-   <th>Remove</th>
-  </tr>
-  <tr>
-   <td>{{item}}</td>
-   <td>
-    <input type="checkbox", id="check", name="assign", value="User-{{item}}", class="attendancecheckvalue" >
-   </td>
-   <td>
-    <input type="checkbox", id="check", name="assign", value="Staff-{{item}}", class="attendancecheckvalue" >
-   </td>
-   <td>
-    <input type="checkbox", id="check", name="assign", value="Super_user-{{item}}", class="attendancecheckvalue" >
-   </td>
-   <td>
-        <input type="checkbox", id="check", name="assign", value="Delete-{{item}}", class="attendancecheckvalue" >
-   </td>
-  </tr>
+{% if request.user.is_superuser %}
+   <th>Superuser</th>
+   <th>Delete-user</th>
+{% endif %}
+</tr>
+{% for item in context %}
+<tr>
+<td>{{item.username}}</td>
+ <td>
+ <input type="checkbox", name="assign", value="User-{{item}}", class="checkvalue">
+ </td>
+ <td>
+ <input type="checkbox", name="assign", value="Staff-{{item}}", class="checkvalue">
+ </td>
+ {% if request.user.is_superuser %}
+ <td>
+ <input type="checkbox", name="assign", value="Super_user-{{item}}", class="checkvalue">
+ </td>
+ <td>
+ <input type="checkbox", name="assign", value="delete-{{item}}", class="checkvalue">
+ </td>
+ {% endif %}
+</tr>
+{% endfor %}
+ {% endif %}
  </table>
- {% endfor %}
- <br>
- <input type="text", name="attendance", id="attendanceallvalues" size="100">
+ <div class="entry">
+<input type="text", name="attendance", id="allvalues" size="100" class="inputs">
  <button type="submit" id="but1" value="Insert Record">submit</button>
+ </div>
 </form>
 </div>
-<!-- 
+
 <style>
- .container{
-  background-color:antiquewhite;
-  width:50%;
-  height:10%;
-  margin:auto
- }
- form{
-  background-color:azure;
-  width:50%;
-  height:50px;
-  margin:auto;
- }
- label{
-  background-color:aquamarine;
- }
- input{
-  background-color:blue
- }
- 
+.container{
+ background-color:aliceblue;
+ width:600px;
+ height:fit-content;
+ padding:10px;
+ margin:auto;
+ margin-top:150px;
+ border-radius:10px;
+ border:2px solid rgba(0,0,0,0.2)
+}
+h3{
+ text-align: center;
+}
+form{
+ background-color:transparent;
+ width:90%;
+ height:250px;
+ margin:auto;
+ padding:10px;
+ /* border-radius:10px; */
+ /* border:2px solid rgba(0,0,0,0.2) */
+}
+table{
+ background-color:transparent;
+ width:100%;
+ height:70%;
+ border-collapse: collapse;
+}
+td{
+ background-color:transparent;
+ border:1px dotted rgba(0,0,0,0.2);
+ text-align: center;
+ width:20%
+}
+th{
+ border:1px dotted rgba(0,0,0,0.2)
+}
  button{
-  cursor: pointer;
- }
-</style> -->
-<style>
- button{
-  background-color:aqua;
-  margin-top:40px;
+  background-color:transparent;
   width:15%;
-  height:20px;
-  cursor:pointer
+  height:30px;
+  cursor:pointer;
+  margin:auto;
+  margin-top:10px;
+  border-radius:10px;
+  border:1px solid rgba(0,0,0,0.2)
+ }
+ .entry{
+ width:100%;
+ background-color:transparent;
+ margin-top:5px;
+ margin:auto;
+ display:flex;
+ flex-direction: column;
+ }
+ .inputs {
+ width:80%;
+ height:25px;
+ margin:auto;
+ margin-top:5px;
+ outline: none;
+ border:1px solid rgba(0,0,0,0.2);
+ border-radius:5px
  }
 </style>

@@ -21,7 +21,13 @@ class TestAdmin(admin.ModelAdmin):
    return permit is True
   else:
    return permit is False
-  
+
+ def has_view_permission(self,request,obj=None):
+  permit =super().has_view_permission(request,obj)
+  if request.user.is_staff == True:
+   return permit is True
+  else:
+   return permit is False
 
 # class permitDel(admin.ModelAdmin):
 #  def get_actions(self,request):

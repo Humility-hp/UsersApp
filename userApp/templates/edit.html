@@ -1,32 +1,77 @@
-
 <div class="container">
+ <h4>Edit your items here below</h4>
  <form method="POST">
   {% csrf_token %}
-  <label for="">New name of Item</label>
-  <input type="text", name='title',placeholder="change {{item.item}} to...", required>
-  <button type="submit">Edit</button>
+  <div class="entry">
+  <label for="title">New item:</label>
+  <input type="text", name='title', placeholder="change '{{item}}' to...", required>
+  </div>
+    <button type="submit">Edit</button>
  </form>
 </div>
 
 <style>
  .container{
-  background-color:lightblue;
-  height:25vh;
+  background-color:aliceblue;
+  height:200px;
   display:block;
   margin:auto;
   margin-top:auto;
   margin-bottom:auto;
-  width:50vw
+  width:450px;
+  margin-top:250px;
+  border-radius:10px;
+  padding-top:1px;
+  border:2px solid rgba(0,0,0,0.2)
  }
  form{
   margin:auto;
-  margin-top:auto;
-  margin-bottom: auto;
-  width:50%;
-  background-color:antiquewhite;
-  height:10vh
+  width:90%;
+  background-color:transparent;
+  height:60%;
+  padding:10px;
+  margin-top:-5px;
+  border-radius:10px;
+  display:flex;
+  flex-direction: column;
+  /* align-content: center; */
+ }
+ h4{
+  background-color:transparent;
+  width:100%;
+  text-align: center;
  }
  button{
-  background-color:blueviolet
+  background-color:transparent;
+  width:20%;
+  margin:auto;
+  height:30px;
+  border:1px solid rgba(0,0,0,0.2);
+  border-radius:10px;
+  cursor:pointer
+ }
+ input{
+  width:80%;
+  height:100%;
+  outline: none;
+  border:none;
+  background-color:transparent;
+  font-size: 15px;
+ }
+ .entry{
+  background-color:transparent;
+  display:flex;
+  justify-content: space-around;
+  flex-direction: row;
+  align-content: center;
+  padding:2px;
+  height:30%;
+  border-radius:5px;
+  border:1px solid rgba(0,0,0,0.2)
+ }
+ label{
+  background-color:transparent;
+  align-self: center;
+  font-size: 18px;
  }
 </style>

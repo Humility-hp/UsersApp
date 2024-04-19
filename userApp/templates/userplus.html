@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<div class="newuser">
+<h3>Add new users below</h3>
+<form action="/userplus" method="POST">
+ {% csrf_token %}
+ <div class="name">
+ <label for="usernm"><i class="fa-regular fa-user"></i></label>
+ <input type="text", name="usernm", required, placeholder="username here...">
+ </div>
+ <div class="email">
+ <label for="email"><i class="fa fa-envelope" aria-hidden="true"></i></label>
+ <input type="text", name="email", required, placeholder="Email here..">
+ </div>
+ <div class="passwd">
+ <label for="passwd"><i class="fa fa-key" aria-hidden="true"></i></label>
+ <input type="text", name="passwd", required, placeholder="Password here..">
+ </div>
+ <button type="submit" class="btn">Submit</button>
+</form>
+
+</div>
+
+<style>
+ *{
+  padding:5px
+ }
+.newuser{
+ background-color:aliceblue;
+ width:500px;
+ height:300px;
+ margin:auto;
+ margin-top:25vh;
+ border-radius:10px;
+ display:flex;
+ flex-direction: column;
+ column-gap: -5px;
+} 
+h3{
+ text-align: center;
+}
+form{
+ background-color:Transparent;
+ width:80%;
+ /* margin-top:-15px; */
+ margin:auto;
+ display:flex;
+ flex-direction: column;
+ row-gap: 5px;
+}
+form div{
+ background-color:none;
+ border-bottom: 2px solid rgba(0,0,0,0.2);
+}
+form div input{
+ width:85%;
+ border:none;
+ outline-style: none;
+ background-color:transparent
+}
+.btn{
+ background-color: transparent;
+ width:20%;
+ margin:auto;
+ border-radius:10px;
+ cursor:pointer;
+ border:2px solid rgba(0,0,0,0.2)
+}
+</style>
